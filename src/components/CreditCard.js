@@ -1,29 +1,61 @@
 import { useState } from "react";
-import { CCard, CCardImg, CCardDetails, Container } from './CreditCard.style'
+import { CCard, CCardImg, CCardDetails, CCardDetailsBetween, Container, Heading, NumberHeading, Form, TextInput, TwoCols } from './CreditCard.style'
 
 const CreditCard = () => {
-  const [cardNumber, setCardNumber] = useState("xxxx xxxx xxxx xxxx xxxx");
-  const [name, setName] = useState("xxxxx xxxxx");
-  const [expDate, setExpDate] = useState("xx/xx");
+  const [cardNumber, setCardNumber] = useState("xxxxxxxxxxxxxxxx"); //xxxxxxxxxxxxxxxx
+  const [name, setName] = useState("xxxxx xxxxx"); //xxxxx xxxxx
+  const [expDate, setExpDate] = useState("xx/xx"); //xx/xx
+
+  //4072953415275
+  const _visaCardRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
+  const _imgUrl = _visaCardRegex.test(cardNumber) ? ("../../visa-logo.png") : ("../../mc-logo.png");
+  const _cclen = cardNumber.length;
+  const _formatCCNumber = cardNumber ? (_cclen % 4 != 0 ?
+    [cardNumber.slice(0, _cclen % 4)].concat(cardNumber.slice(_cclen % 4, _cclen).match(/.{4}/g)).join(" ") :
+    cardNumber.match(/.{4}/g).join(" ")) :
+    "xxxx xxxx xxxx xxxx";
+  const _formatName = name.toUpperCase();
+  const _formatExpDate = expDate.toUpperCase();
 
   return (
     <Container>
-      <div>
-        <CCard>
-          <CCardImg>
-            <img
-              src="../../visa-logo.png"
-              alt="Credit Card Type Logo"
-              height="30%"
-            />
-          </CCardImg>
-          <CCardDetails>card number</CCardDetails>
-          <CCardDetails>cardholder name expiration valid thru</CCardDetails>
-        </CCard>
-      </div>
-      <div>
-        FORM
-      </div>
+      <CCard>
+        <CCardImg>
+          <img
+            src={_imgUrl}
+            alt="Credit Card Type Logo"
+            height="40%"
+          />
+        </CCardImg>
+        <CCardDetails>card number<NumberHeading>{_formatCCNumber}</NumberHeading></CCardDetails>
+        <CCardDetailsBetween>
+          <div>
+            cardholder name<Heading>{_formatName}</Heading>
+          </div>
+          <div>
+            valid thru<Heading>{_formatExpDate}</Heading>
+          </div>
+        </CCardDetailsBetween>
+      </CCard>
+      <Form>
+        <label for="fname">Name</label>
+        <TextInput type="text" id="name" name="name" placeholder="Your name.." value={name} onChange={(e) => setName(e.target.value ? e.target.value.slice(0, 10) : "")} />
+
+        <label for="lname">Card Number</label>
+        <TextInput type="text" id="ccnumber" name="ccnumber" placeholder="Your credit card number.." value={cardNumber} onChange={(e) => setCardNumber(e.target.value ? e.target.value.slice(0, 16) : "")} />
+
+        <TwoCols>
+          <div>
+            <label for="lname">Expiration (mm/yy)</label>
+            <TextInput type="text" id="ccnumber" name="ccnumber" placeholder="MM / YY" value={expDate} onChange={(e) => setExpDate(e.target.value ? e.target.value : "")} />
+          </div>
+          <span />
+          <div>
+            <label for="lname">Security Code</label>
+            <TextInput type="password" id="ccnumber" name="ccnumber" placeholder="Code.." />
+          </div>
+        </TwoCols>
+      </Form>
     </Container>
   );
 };

@@ -17,6 +17,6 @@ For task 1. Create an interactive credit card, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-For task 2. Create a javascript immutable object that contain properties series and parallel, you can check the answer in the following file:
+For task 2. Create a javascript immutable object that contain properties series and parallel, you can check the answer in the following file (./src/components/Qn2.js), you can also run:
 
-### ./src/components/Qn2.js
+### node .\src\components\Qn2.js
