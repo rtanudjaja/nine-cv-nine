@@ -21,4 +21,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 You can check the answer in the following file (./src/components/Qn2.js), you can also run:
 
-### node .\src\components\Qn2.js
+### `node .\src\components\Qn2.js`

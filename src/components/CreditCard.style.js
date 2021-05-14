@@ -7,6 +7,7 @@ export const CCard = styled.section`
   width: 480px;
   height: 296px;
   color: white;
+  border-radius: 25px;
 `;
 
 export const CCardImg = styled.div`
@@ -37,8 +38,8 @@ export const Heading = styled.h1`
 `;
 
 export const NumberHeading = styled(Heading)`
-  font-size: 2.5em;
-  letter-spacing: 0.15em;
+  font-size: 2em;
+  letter-spacing: 0.06em;
 `;
 
 export const Form = styled.div`
